@@ -1,8 +1,9 @@
 # Caesars Cipher
 # crypt a string by shifting letters in message by 'X' in alphabet
-
-def alpha?(c)
-    c.between?('a', 'z') || c.between?('A', 'Z')
+class String
+    def alpha?
+        self.between?('a', 'z') || self.between?('A', 'Z')
+    end
 end
 
 def caesar_cipher(message, shift)
@@ -11,7 +12,7 @@ def caesar_cipher(message, shift)
     message.each_char do |letter|
         ascii_offset = letter.ord < 91 ? 'A'.ord : 'a'.ord
         
-        if alpha?(letter)
+        if letter.alpha?
             crypted_message += (((letter.ord - ascii_offset) + shift) % 26 + ascii_offset).chr
         else
             crypted_message += letter
